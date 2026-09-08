@@ -1,0 +1,45 @@
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
+build
+
+# Dependencies
+/node_modules
+
+# Local Cloud App development
+.ng
+config.json
+cloudapp/src/assets/manifest*.json
+
+# Coverage / logs
+/coverage
+npm-debug.log
+yarn-error.log
+testem.log
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+/libpeerconnection.log
+/connect.lock
+/typings
+/.sass-cache
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# System files
+.DS_Store
+Thumbs.db

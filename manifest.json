@@ -1,0 +1,21 @@
+{
+   "id": "katalogizacni-listky",
+   "title": "Katalogizační lístky",
+   "subtitle": "Tisk katalogizačních lístků podle MMS ID",
+   "author": "Antonín Skopec",
+   "description": "Vytváří a tiskne katalogizační lístky z bibliografických záznamů Alma podle zadaných MMS ID. Vyžaduje přihlášeného uživatele Almy s oprávněním číst bibliografické záznamy. Aplikace data pouze čte a v Almě nic nemění.",
+   "license": "https://opensource.org/license/mit",
+   "relevantForInst": [
+      "420CARDS_CVUT"
+   ],
+   "contentSecurity": {
+      "sandbox": {
+         "popups": true,
+         "popups-to-escape-sandbox": true
+      }
+   },
+   "icon": {
+      "type": "url",
+      "value": "/assets/katalogizacni-listky.png"
+   }
+}

@@ -1,0 +1,152 @@
+.page {
+  padding: 16px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.intro {
+  margin: 0 0 10px;
+}
+
+.mms-input {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 112px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.load-button,
+.print-button {
+  padding: 9px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.load-button:disabled,
+.print-button:disabled {
+  cursor: default;
+  opacity: .6;
+}
+
+.loading {
+  margin: 12px 0;
+  font-weight: 600;
+}
+
+.error-box {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #999;
+  background: #f5f5f5;
+}
+
+.preview-title {
+  margin: 18px 0 8px;
+  font-weight: 700;
+}
+
+.preview-shell {
+  width: 100%;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+/*
+  Skutečný tiskový lístek má poměr 140 x 88 mm.
+  V panelu CloudApp jej zmenšujeme jako celek, takže náhled
+  zůstává ve stejném poměru jako tisk.
+*/
+.preview-scale {
+  width: 100%;
+  aspect-ratio: 140 / 88;
+  position: relative;
+}
+
+.preview-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 352px;
+  transform-origin: top left;
+  transform: scale(calc((100vw - 64px) / 560));
+  max-width: none;
+
+  padding: 44px 44px 32px;
+  border: 1px solid #555;
+  background: #fff;
+  color: #000;
+  font-family: "Times New Roman", Times, serif;
+  overflow: hidden;
+}
+
+@media (min-width: 620px) {
+  .preview-card {
+    transform: scale(0.88);
+  }
+
+  .preview-scale {
+    height: 310px;
+    aspect-ratio: auto;
+  }
+}
+
+.preview-author {
+  padding-right: 25px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.preview-meta {
+  margin-top: 8px;
+  padding-right: 8px;
+  text-align: right;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  letter-spacing: .7px;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.preview-meta .sep {
+  display: inline-block;
+  margin: 0 9px;
+}
+
+.preview-description {
+  margin-top: 26px;
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.preview-subjects {
+  position: absolute;
+  left: 44px;
+  right: 44px;
+  bottom: 32px;
+  display: block;
+  font-size: 13px;
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+
+
+.preview-subjects > div + div {
+  margin-top: 3px;
+}

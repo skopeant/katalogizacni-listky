@@ -1,0 +1,78 @@
+<div class="page">
+  <h1>Katalogizační lístky</h1>
+
+  <p class="intro">
+    Zadejte MMS ID, každé na samostatném řádku.
+  </p>
+
+  <textarea
+    #mmsIds
+    class="mms-input"
+    rows="6"
+    placeholder="990001041520109903"
+  ></textarea>
+
+  <div class="actions">
+    <button
+      type="button"
+      class="load-button"
+      (click)="load(mmsIds.value)"
+      [disabled]="loading"
+    >
+      {{ loading ? 'Načítám…' : 'Vytvořit lístky' }}
+    </button>
+
+    <button
+      *ngIf="cards.length"
+      type="button"
+      class="print-button"
+      (click)="printCards()"
+      [disabled]="loading"
+    >
+      Tisk
+    </button>
+  </div>
+
+  <div *ngIf="error" class="error-box">
+    {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Načítám bibliografické záznamy z Almy…
+  </div>
+
+  <div *ngIf="cards.length" class="preview-title">
+    Náhled
+  </div>
+
+  <div class="preview-list">
+    <div *ngFor="let card of cards" class="preview-shell">
+      <div *ngIf="card.error" class="error-box">
+        <strong>MMS ID {{ card.mmsId }}</strong><br>
+        {{ card.error }}
+      </div>
+
+      <div *ngIf="!card.error" class="preview-scale">
+        <div class="preview-card">
+          <div class="preview-author">{{ card.author }}</div>
+
+          <div class="preview-meta">
+            <span>{{ card.genre }}</span>
+            <span class="sep">_</span>
+            <span>{{ card.mmsId }}</span>
+          </div>
+
+          <div class="preview-description">
+            {{ card.description }}
+          </div>
+
+          <div class="preview-subjects">
+            <div *ngFor="let subject of card.subjects">
+              {{ subject }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
