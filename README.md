@@ -2,13 +2,22 @@
 
 [English](README.md) | [Česky](README.cs.md)
 
-Catalog Cards is an Ex Libris Alma Cloud App for creating and printing catalog cards from Alma bibliographic records using local MMS IDs.
+Catalog Cards is an Ex Libris Alma Cloud App that creates and prints catalog cards from Alma bibliographic records using MMS IDs.
 
-The application is currently restricted to the Czech Technical University in Prague.
+The Cloud App is available to Alma institutions generally and is not restricted to a specific institution.
+
+## Languages
+
+The Cloud App user interface supports:
+
+- English (`en`) — fallback language
+- Czech (`cs`)
+
+The application follows the language of the current Alma session. The bibliographic content itself is taken from the Alma record and is not translated.
 
 ## Features
 
-- Enter one or more local Alma MMS IDs
+- Enter one or more Alma MMS IDs
 - Retrieve bibliographic records through the Alma Cloud App REST service
 - Generate formatted catalog cards from selected MARC21 fields
 - Preview catalog cards before printing
@@ -26,16 +35,18 @@ The application uses the following MARC21 fields:
 - `250` — edition
 - `264` / `260` — publication information
 - `300` — physical description
-- `650 $a` — subject headings; headings with `$2 czenas` are preferred
+- `650 $a` — subject headings; headings with `$2 czenas` are preferred when present
 - last relevant `655 $a` — form/genre displayed at the top of the card
 - local MMS ID — displayed at the top of the card
+
+If no `$2 czenas` fields are present, the application falls back to the available `650` / `655` fields.
 
 ## Requirements
 
 - Ex Libris Alma with Cloud Apps support
 - An authenticated Alma user with permission to read bibliographic records
 
-The exact Alma role required may depend on the institution's configuration.
+The exact Alma role required may depend on the institution's role configuration.
 
 ## Security and data handling
 
@@ -48,17 +59,13 @@ See also:
 - [Security Policy](SECURITY.md)
 - [Privacy and Data Handling](PRIVACY.md)
 
-## Institution restriction
+## Availability
 
-The manifest contains:
+The manifest does not contain `relevantForInst`, so the Cloud App can be discovered and installed by Alma institutions generally.
 
-```json
-"relevantForInst": [
-  "420CARDS_CVUT"
-]
-```
+## Help
 
-The Cloud App is therefore available in Alma only to the Czech Technical University in Prague, while the source repository remains public for the Ex Libris publishing process.
+https://skopec.vosis.cz/alma/cloudapp/katalogizacni-listky/
 
 ## Local development
 
@@ -88,3 +95,7 @@ Antonín Skopec
 ## License
 
 MIT License. See [LICENSE](LICENSE).
+
+## Version
+
+2.2.0

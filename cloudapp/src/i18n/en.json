@@ -1,3 +1,26 @@
 {
-    "translatedExampleText": "An example of a translated label"
+  "Main": {
+    "Title": "Catalog Cards",
+    "Intro": "Enter MMS IDs, one per line.",
+    "Placeholder": "990001041520109903",
+    "Loading": "Loading…",
+    "CreateCards": "Create cards",
+    "Print": "Print",
+    "LoadingRecords": "Loading bibliographic records from Alma…",
+    "Preview": "Preview"
+  },
+  "Errors": {
+    "AtLeastOne": "Enter at least one MMS ID.",
+    "Max100": "You can enter a maximum of 100 MMS IDs at a time.",
+    "DigitsOnly": "MMS IDs must contain digits only. Invalid values: {{values}}",
+    "NothingToPrint": "There is nothing to print.",
+    "PopupBlocked": "The browser blocked the print window. Allow pop-up windows for Alma.",
+    "MarcMissing": "The BIB record was loaded, but MARCXML content was not found in the anies field.",
+    "MarcParse": "The MARCXML content could not be processed.",
+    "Unknown": "Unknown error.",
+    "Http": "HTTP error {{status}}"
+  },
+  "Print": {
+    "Title": "Catalog Cards"
+  }
 }

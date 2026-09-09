@@ -1,0 +1,26 @@
+{
+  "Main": {
+    "Title": "Katalogizační lístky",
+    "Intro": "Zadejte MMS ID, každé na samostatném řádku.",
+    "Placeholder": "990001041520109903",
+    "Loading": "Načítám…",
+    "CreateCards": "Vytvořit lístky",
+    "Print": "Tisk",
+    "LoadingRecords": "Načítám bibliografické záznamy z Almy…",
+    "Preview": "Náhled"
+  },
+  "Errors": {
+    "AtLeastOne": "Zadejte alespoň jedno MMS ID.",
+    "Max100": "Najednou lze zadat maximálně 100 MMS ID.",
+    "DigitsOnly": "MMS ID musí obsahovat pouze číslice. Chybné hodnoty: {{values}}",
+    "NothingToPrint": "Není co tisknout.",
+    "PopupBlocked": "Prohlížeč zablokoval tiskové okno. Povolte vyskakovací okna pro Almu.",
+    "MarcMissing": "BIB byl načten, ale nebyl nalezen MARCXML obsah v poli anies.",
+    "MarcParse": "MARCXML se nepodařilo zpracovat.",
+    "Unknown": "Neznámá chyba.",
+    "Http": "HTTP chyba {{status}}"
+  },
+  "Print": {
+    "Title": "Katalogizační lístky"
+  }
+}

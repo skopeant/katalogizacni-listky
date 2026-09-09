@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.2.0] - 2026-09-09
+
+### Added
+- Full Czech and English localization of the Cloud App user interface.
+- English is used as the fallback language.
+- The interface follows the language of the current Alma session.
+
+### Changed
+- Removed `relevantForInst`; the Cloud App is now available to Alma institutions generally.
+- Corrected the Help URL to the Catalog Cards documentation.
+- Updated public documentation for institution-independent use.
+- Removed the unused Spanish example translation.
+- Removed the duplicated `cloudapp/src/assets/manifest.json`.
+- Replaced Czech-locale-specific uppercasing with institution-neutral Unicode uppercasing.
+
+### Notes
+- Bibliographic content itself is not translated; it is taken directly from Alma records.
+- The application remains read-only and does not modify Alma data.
+
 All notable changes to this project are documented here.
 
 ## [2.1.1] - 2026-09-09

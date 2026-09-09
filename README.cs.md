@@ -2,13 +2,22 @@
 
 [English](README.md) | [Česky](README.cs.md)
 
-Katalogizační lístky jsou Cloud App pro Ex Libris Alma, která vytváří a tiskne katalogizační lístky z bibliografických záznamů Almy podle lokálních MMS ID.
+Katalogizační lístky jsou Cloud App pro Ex Libris Alma, která vytváří a tiskne katalogizační lístky z bibliografických záznamů Almy podle MMS ID.
 
-Aplikace je v současnosti omezena na České vysoké učení technické v Praze.
+Cloud App je dostupná obecně institucím používajícím Almu a není omezena na konkrétní instituci.
+
+## Jazyky
+
+Uživatelské rozhraní Cloud App podporuje:
+
+- češtinu (`cs`)
+- angličtinu (`en`) — zároveň slouží jako fallback
+
+Aplikace automaticky používá jazyk aktuální relace Almy. Bibliografický obsah se přebírá ze záznamu v Almě a nepřekládá se.
 
 ## Funkce
 
-- zadání jednoho nebo více lokálních Alma MMS ID
+- zadání jednoho nebo více Alma MMS ID
 - načtení bibliografických záznamů prostřednictvím REST služby Alma Cloud Apps
 - vytvoření formátovaných katalogizačních lístků z vybraných polí MARC21
 - náhled katalogizačních lístků před tiskem
@@ -26,9 +35,11 @@ Aplikace používá následující pole MARC21:
 - `250` — vydání
 - `264` / `260` — nakladatelské údaje
 - `300` — fyzický popis
-- `650 $a` — věcná hesla; přednostně pole s `$2 czenas`
+- `650 $a` — věcná hesla; pokud existují pole s `$2 czenas`, mají přednost
 - poslední relevantní `655 $a` — označení formy/žánru v horní části lístku
 - lokální MMS ID — vytištěno v horní části lístku
+
+Pokud záznam neobsahuje pole s `$2 czenas`, aplikace použije dostupná pole `650` / `655`.
 
 ## Požadavky
 
@@ -48,17 +59,13 @@ Další informace:
 - [Security Policy](SECURITY.md)
 - [Privacy and Data Handling](PRIVACY.md)
 
-## Omezení na instituci
+## Dostupnost
 
-Manifest obsahuje:
+Manifest neobsahuje `relevantForInst`, takže Cloud App mohou v App Centeru najít a nainstalovat obecně instituce používající Almu.
 
-```json
-"relevantForInst": [
-  "420CARDS_CVUT"
-]
-```
+## Nápověda
 
-Cloud App je proto v Almě dostupná pouze Českému vysokému učení technickému v Praze, zatímco zdrojový repozitář zůstává veřejný kvůli publikačnímu procesu Ex Libris.
+https://skopec.vosis.cz/alma/cloudapp/katalogizacni-listky/
 
 ## Lokální vývoj
 
@@ -88,3 +95,7 @@ Antonín Skopec
 ## Licence
 
 MIT License. Viz [LICENSE](LICENSE).
+
+## Verze
+
+2.2.0

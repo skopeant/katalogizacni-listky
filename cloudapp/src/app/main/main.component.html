@@ -1,15 +1,15 @@
 <div class="page">
-  <h1>Katalogizační lístky</h1>
+  <h1>{{ 'Main.Title' | translate }}</h1>
 
   <p class="intro">
-    Zadejte MMS ID, každé na samostatném řádku.
+    {{ 'Main.Intro' | translate }}
   </p>
 
   <textarea
     #mmsIds
     class="mms-input"
     rows="6"
-    placeholder="990001041520109903"
+    [placeholder]="'Main.Placeholder' | translate"
   ></textarea>
 
   <div class="actions">
@@ -19,7 +19,7 @@
       (click)="load(mmsIds.value)"
       [disabled]="loading"
     >
-      {{ loading ? 'Načítám…' : 'Vytvořit lístky' }}
+      {{ loading ? ('Main.Loading' | translate) : ('Main.CreateCards' | translate) }}
     </button>
 
     <button
@@ -29,7 +29,7 @@
       (click)="printCards()"
       [disabled]="loading"
     >
-      Tisk
+      {{ 'Main.Print' | translate }}
     </button>
   </div>
 
@@ -38,11 +38,11 @@
   </div>
 
   <div *ngIf="loading" class="loading">
-    Načítám bibliografické záznamy z Almy…
+    {{ 'Main.LoadingRecords' | translate }}
   </div>
 
   <div *ngIf="cards.length" class="preview-title">
-    Náhled
+    {{ 'Main.Preview' | translate }}
   </div>
 
   <div class="preview-list">

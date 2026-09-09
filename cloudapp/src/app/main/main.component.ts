@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CloudAppRestService } from '@exlibris/exl-cloudapp-angular-lib';
+import { TranslateService } from '@ngx-translate/core';
 import { forkJoin, of } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 
@@ -43,7 +44,10 @@ export class MainComponent {
   error = '';
   cards: CatalogCard[] = [];
 
-  constructor(private restService: CloudAppRestService) {}
+  constructor(
+    private restService: CloudAppRestService,
+    private translate: TranslateService
+  ) {}
 
   load(mmsText: string): void {
     this.error = '';
@@ -52,18 +56,18 @@ export class MainComponent {
     const ids = this.parseIds(mmsText);
 
     if (!ids.length) {
-      this.error = 'Zadejte alespoň jedno MMS ID.';
+      this.error = this.t('Errors.AtLeastOne');
       return;
     }
 
     if (ids.length > 100) {
-      this.error = 'Najednou lze zadat maximálně 100 MMS ID.';
+      this.error = this.t('Errors.Max100');
       return;
     }
 
     const invalid = ids.filter(id => !/^\d+$/.test(id));
     if (invalid.length) {
-      this.error = 'MMS ID musí obsahovat pouze číslice. Chybné hodnoty: ' + invalid.join(', ');
+      this.error = this.t('Errors.DigitsOnly', { values: invalid.join(', ') });
       return;
     }
 
@@ -89,13 +93,13 @@ export class MainComponent {
   printCards(): void {
     const printable = this.cards.filter(card => !card.error);
     if (!printable.length) {
-      this.error = 'Není co tisknout.';
+      this.error = this.t('Errors.NothingToPrint');
       return;
     }
 
     const w = window.open('', '_blank');
     if (!w) {
-      this.error = 'Prohlížeč zablokoval tiskové okno. Povolte vyskakovací okna pro Almu.';
+      this.error = this.t('Errors.PopupBlocked');
       return;
     }
 
@@ -119,10 +123,10 @@ export class MainComponent {
 
     w.document.open();
     w.document.write(`<!doctype html>
-<html lang="cs">
+<html lang="${this.escapeHtml(this.lang())}">
 <head>
 <meta charset="utf-8">
-<title>Katalogizační lístky</title>
+<title>${this.escapeHtml(this.t('Print.Title'))}</title>
 <style>
   @page {
     size: A4 portrait;
@@ -250,7 +254,7 @@ export class MainComponent {
         description: '',
         genre: '',
         subjects: [],
-        error: 'BIB byl načten, ale nebyl nalezen MARCXML obsah v poli anies.'
+        error: this.t('Errors.MarcMissing')
       };
     }
 
@@ -264,7 +268,7 @@ export class MainComponent {
         description: '',
         genre: '',
         subjects: [],
-        error: 'MARCXML se nepodařilo zpracovat.'
+        error: this.t('Errors.MarcParse')
       };
     }
 
@@ -342,7 +346,7 @@ export class MainComponent {
 
     author = author.replace(/\s*[,;:/]\s*$/, '').trim();
 
-    return author.toLocaleUpperCase('cs-CZ');
+    return author.toUpperCase();
   }
 
   private buildDescription(fields: MarcDataField[], apiTitle: string): string {
@@ -400,7 +404,7 @@ export class MainComponent {
     return selected
       .map(f => this.firstSubfield(f, 'a'))
       .filter(Boolean)
-      .map(v => this.stripFinalPunctuation(v).toLocaleUpperCase('cs-CZ'));
+      .map(v => this.stripFinalPunctuation(v).toUpperCase());
   }
 
   private buildGenre(fields: MarcDataField[]): string {
@@ -414,7 +418,7 @@ export class MainComponent {
     const selected = czenas.length ? czenas : all655;
     const value = this.firstSubfield(selected[selected.length - 1], 'a');
 
-    return this.stripFinalPunctuation(value).toLocaleUpperCase('cs-CZ');
+    return this.stripFinalPunctuation(value).toUpperCase();
   }
 
   private cleanSpacing(value: string): string {
@@ -440,16 +444,26 @@ export class MainComponent {
   }
 
   private getErrorMessage(err: any): string {
-    if (!err) return 'Neznámá chyba.';
+    if (!err) return this.t('Errors.Unknown');
 
     if (err.error?.errorList?.error?.[0]?.errorMessage) {
       return err.error.errorList.error[0].errorMessage;
     }
 
     if (err.message) return err.message;
-    if (err.status) return `HTTP chyba ${err.status}`;
+    if (err.status) return this.t('Errors.Http', { status: err.status });
 
     return String(err);
+  }
+
+  private lang(): string {
+    return String(this.translate.currentLang || this.translate.defaultLang || 'en')
+      .toLowerCase()
+      .split('-')[0];
+  }
+
+  private t(key: string, params?: Record<string, any>): string {
+    return this.translate.instant(key, params);
   }
 
   private escapeHtml(value: string): string {

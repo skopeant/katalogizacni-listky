@@ -1,52 +1,48 @@
 {
-  "id": "skopeant/katalogizacni-listky",
-  "title": [
-    {
-      "lang": "en",
-      "text": "Catalog Cards"
-    },
-    {
-      "lang": "cs",
-      "text": "Katalogizační lístky"
-    }
-  ],
-  "subtitle": [
-    {
-      "lang": "en",
-      "text": "Print catalog cards from Alma bibliographic records"
-    },
-    {
-      "lang": "cs",
-      "text": "Tisk katalogizačních lístků z bibliografických záznamů Almy"
-    }
-  ],
-  "author": "Antonín Skopec",
-  "pages": {
-    "help": "https://skopec.vosis.cz/alma/cloudapp/prirustkovy-seznam/"
-  },
-
-  "description": [
-    {
-      "lang": "en",
-      "text": "Creates and prints catalog cards from Alma bibliographic records using entered MMS IDs. Requires an authenticated Alma user with permission to read bibliographic records. The app is read-only and does not modify Alma data."
-    },
-    {
-      "lang": "cs",
-      "text": "Vytváří a tiskne katalogizační lístky z bibliografických záznamů Almy podle zadaných MMS ID. Vyžaduje přihlášeného uživatele Almy s oprávněním číst bibliografické záznamy. Aplikace data pouze čte a v Almě nic nemění."
-    }
-  ],
-  "license": "https://github.com/skopeant/katalogizacni-listky/blob/main/LICENSE",
-  "relevantForInst": [
-    "420CARDS_CVUT"
-  ],
-  "contentSecurity": {
-    "sandbox": {
-      "popups": true,
-      "popups-to-escape-sandbox": true
-    }
-  },
-  "icon": {
-    "type": "url",
-    "value": "/assets/katalogizacni-listky.png"
-  }
+   "id": "skopeant/katalogizacni-listky",
+   "title": [
+      {
+         "lang": "en",
+         "text": "Catalog Cards"
+      },
+      {
+         "lang": "cs",
+         "text": "Katalogizační lístky"
+      }
+   ],
+   "subtitle": [
+      {
+         "lang": "en",
+         "text": "Print catalog cards from Alma bibliographic records"
+      },
+      {
+         "lang": "cs",
+         "text": "Tisk katalogizačních lístků z bibliografických záznamů Almy"
+      }
+   ],
+   "author": "Antonín Skopec",
+   "pages": {
+      "help": "https://skopec.vosis.cz/alma/cloudapp/katalogizacni-listky/"
+   },
+   "description": [
+      {
+         "lang": "en",
+         "text": "Creates and prints catalog cards from Alma bibliographic records using entered MMS IDs. The user interface follows the Alma session language and supports English and Czech. Requires an authenticated Alma user with permission to read bibliographic records. The app is read-only and does not modify Alma data."
+      },
+      {
+         "lang": "cs",
+         "text": "Vytváří a tiskne katalogizační lístky z bibliografických záznamů Almy podle zadaných MMS ID. Uživatelské rozhraní se řídí jazykem relace Almy a podporuje češtinu a angličtinu. Vyžaduje přihlášeného uživatele Almy s oprávněním číst bibliografické záznamy. Aplikace data pouze čte a v Almě nic nemění."
+      }
+   ],
+   "license": "https://github.com/skopeant/katalogizacni-listky/blob/main/LICENSE",
+   "contentSecurity": {
+      "sandbox": {
+         "popups": true,
+         "popups-to-escape-sandbox": true
+      }
+   },
+   "icon": {
+      "type": "url",
+      "value": "/assets/katalogizacni-listky.png"
+   }
 }
