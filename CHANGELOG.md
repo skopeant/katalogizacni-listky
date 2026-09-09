@@ -2,6 +2,22 @@
 
 All notable changes to this project are documented here.
 
+## [2.1.0] - 2026-09-09
+
+### Changed
+- Added English and Czech localized metadata for the Cloud App title, subtitle, and description.
+- Standardized the application license as MIT across repository metadata.
+- Changed the manifest license URL to the repository `LICENSE` file.
+- Standardized the package name and package description.
+- Added full English and Czech README documentation.
+- Updated the package version to 2.1.0.
+
+### Fixed
+- Corrected the inconsistent `BSD-3-Clause` license value in `package.json`.
+
+### Notes
+- No functional changes were made to catalog-card generation, preview, or printing.
+
 ## [1.0.0] - 2026-09-08
 
 ### Added

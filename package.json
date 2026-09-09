@@ -1,8 +1,8 @@
 {
-  "name": "my-exl-cloudapp",
-  "version": "2.0.0",
-  "description": "",
-  "license": "BSD-3-Clause",
+  "name": "katalogizacni-listky",
+  "version": "2.1.0",
+  "description": "Ex Libris Alma Cloud App for creating and printing catalog cards from bibliographic records using MMS IDs.",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "start": "eca start"

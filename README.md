@@ -1,79 +1,90 @@
-# Katalogizační lístky
+# Catalog Cards
 
-Cloud App pro Ex Libris Alma, která vytváří tiskové katalogizační lístky podle lokálních MMS ID.
+[English](README.md) | [Česky](README.cs.md)
 
-## Co aplikace dělá
+Catalog Cards is an Ex Libris Alma Cloud App for creating and printing catalog cards from Alma bibliographic records using local MMS IDs.
 
-Uživatel zadá jedno nebo více MMS ID. Cloud App načte bibliografické záznamy z Almy
-pomocí read-only REST volání a připraví náhled a tisk katalogizačních lístků.
+The application is currently restricted to the Czech Technical University in Prague.
 
-Na jednu stránku A4 se tisknou tři lístky.
+## Features
 
-### Použitá MARC pole
+- Enter one or more local Alma MMS IDs
+- Retrieve bibliographic records through the Alma Cloud App REST service
+- Generate formatted catalog cards from selected MARC21 fields
+- Preview catalog cards before printing
+- Print three catalog cards per A4 page
+- Read-only operation — no Alma data is modified
+- No embedded Alma API key
+- No bibliographic data is transmitted to external services
 
-- `100` – autor; pokud chybí, použije se autor vrácený Alma BIB API
-- `245` – název a údaj o odpovědnosti
-- `250` – vydání
-- `264` / `260` – nakladatelské údaje
-- `300` – fyzický popis
-- `650 $a` – věcná hesla; přednostně pole s `$2 czenas`
-- poslední relevantní `655 $a` – označení formy/žánru v horní části lístku
-- lokální MMS ID – vytištěno v horní části lístku
+## MARC21 fields
 
-## Bezpečnost a data
+The application uses the following MARC21 fields:
 
-Aplikace je read-only. Nepoužívá vlastní API klíč, neukládá data mimo Almu
-a neposílá bibliografická data žádné třetí straně. Tisk používá pouze nové okno
-prohlížeče, proto manifest povoluje `popups` a `popups-to-escape-sandbox`.
+- `100` — author; if unavailable, the author returned by the Alma BIB API is used
+- `245` — title and statement of responsibility
+- `250` — edition
+- `264` / `260` — publication information
+- `300` — physical description
+- `650 $a` — subject headings; headings with `$2 czenas` are preferred
+- last relevant `655 $a` — form/genre displayed at the top of the card
+- local MMS ID — displayed at the top of the card
 
-Aplikace vyžaduje přihlášeného uživatele Almy s oprávněním číst bibliografické záznamy.
-Konkrétní role může záviset na nastavení instituce.
+## Requirements
 
-## Omezení na instituci
+- Ex Libris Alma with Cloud Apps support
+- An authenticated Alma user with permission to read bibliographic records
 
-Manifest obsahuje:
+The exact Alma role required may depend on the institution's configuration.
+
+## Security and data handling
+
+The application is read-only. It does not use its own Alma API key, does not modify Alma records, does not persist bibliographic data outside the current browser session, and does not send bibliographic data to third-party services.
+
+Printing is performed in a browser window. The Cloud App manifest therefore enables `popups` and `popups-to-escape-sandbox`.
+
+See also:
+
+- [Security Policy](SECURITY.md)
+- [Privacy and Data Handling](PRIVACY.md)
+
+## Institution restriction
+
+The manifest contains:
 
 ```json
-"relevantForInst": ["420CARDS_CVUT"]
+"relevantForInst": [
+  "420CARDS_CVUT"
+]
 ```
 
-Po publikaci tedy bude Cloud App v Almě dostupná pouze této instituci, i když
-zdrojový GitHub repozitář musí být pro publikační proces Ex Libris veřejný.
+The Cloud App is therefore available in Alma only to the Czech Technical University in Prague, while the source repository remains public for the Ex Libris publishing process.
 
-## Lokální vývoj
+## Local development
 
-Po naklonování repozitáře:
+After cloning the repository:
 
 ```text
 eca init
 eca start
 ```
 
-Při `eca init` se doplní lokální `config.json` s URL vaší Alma instance.
-`config.json` je v `.gitignore` a nemá být publikován.
+During `eca init`, a local `config.json` containing the Alma environment URL is created. `config.json` is ignored by Git and must not be committed.
 
-## Kontrola před vydáním
+## Build
+
+Before creating a release:
 
 ```text
 eca build
 ```
 
-Produkční build musí proběhnout bez chyb před vytvořením GitHub Release.
+The production build must complete successfully before a GitHub Release is created.
 
-## Licence
+## Author
 
-MIT License. Viz [LICENSE](LICENSE).
+Antonín Skopec
 
----
+## License
 
-# English summary
-
-**Katalogizační lístky** is an institution-restricted Ex Libris Alma Cloud App
-for creating printable catalog cards from local MMS IDs.
-
-The app reads Alma bibliographic records, formats selected MARC21 fields, and
-prints three cards per A4 page. It is read-only, uses no embedded API key,
-does not modify Alma data, and does not transmit bibliographic data to external
-services.
-
-It requires an Alma user with permission to read bibliographic records.
+MIT License. See [LICENSE](LICENSE).
