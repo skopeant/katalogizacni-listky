@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented here.
 
+## [2.1.1] - 2026-09-09
+
+### Changed
+- Added a Help link to the Cloud App manifest.
+
 ## [2.1.0] - 2026-09-09
 
 ### Changed

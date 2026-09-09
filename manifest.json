@@ -21,6 +21,10 @@
     }
   ],
   "author": "Antonín Skopec",
+  "pages": {
+    "help": "https://skopec.vosis.cz/alma/cloudapp/prirustkovy-seznam/"
+  },
+
   "description": [
     {
       "lang": "en",
