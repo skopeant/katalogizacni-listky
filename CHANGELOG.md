@@ -1,4 +1,7 @@
-# Changelog
+## 2.2.1
+
+- Changed the application title to the bilingual form **Katalogizační lístky – Catalog Cards**.
+- Standardized the print-preview window to use a CSP-safe **Print** button.
 
 ## [2.2.0] - 2026-09-09
 

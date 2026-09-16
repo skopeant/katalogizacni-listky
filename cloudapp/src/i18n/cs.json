@@ -21,6 +21,7 @@
     "Http": "HTTP chyba {{status}}"
   },
   "Print": {
-    "Title": "Katalogizační lístky"
+    "Title": "Katalogizační lístky",
+    "PrintButton": "Tisk"
   }
 }

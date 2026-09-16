@@ -21,6 +21,7 @@
     "Http": "HTTP error {{status}}"
   },
   "Print": {
-    "Title": "Catalog Cards"
+    "Title": "Catalog Cards",
+    "PrintButton": "Print"
   }
 }

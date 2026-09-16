@@ -1,4 +1,4 @@
-# Catalog Cards
+# Katalogizační lístky – Catalog Cards
 
 [English](README.md) | [Česky](README.cs.md)
 
@@ -98,4 +98,6 @@ MIT License. See [LICENSE](LICENSE).
 
 ## Version
 
-2.2.0
+2.2.1
+
+

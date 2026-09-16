@@ -214,25 +214,35 @@ export class MainComponent {
     margin-top: 0.8mm;
   }
 
+  .screen-only { margin: 8px auto 16px; width: 140mm; text-align: right; }
+  .screen-only button { font: 14px Arial, Helvetica, sans-serif; padding: 7px 14px; }
+
   @media screen {
     body { padding: 12mm 0; }
   }
 
   @media print {
     body { padding: 0; }
+    .screen-only { display: none; }
   }
 </style>
 </head>
 <body>
+<div class="screen-only"><button id="print-button" type="button">${this.escapeHtml(this.t('Print.PrintButton'))}</button></div>
 <div class="sheet">${cardsHtml}</div>
-<script>
-  window.onload = function () {
-    setTimeout(function () { window.print(); }, 150);
-  };
-<\/script>
 </body>
 </html>`);
     w.document.close();
+
+    const printButton = w.document.getElementById('print-button');
+    if (printButton) {
+      printButton.addEventListener('click', () => {
+        w.focus();
+        w.print();
+      });
+    }
+
+    setTimeout(() => w.focus(), 150);
   }
 
   private parseIds(text: string): string[] {
