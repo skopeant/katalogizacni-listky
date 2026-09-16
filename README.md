@@ -98,6 +98,30 @@ MIT License. See [LICENSE](LICENSE).
 
 ## Version
 
-2.2.1
+2.2.2
 
 
+
+
+### Catalog card layout
+
+Printed catalog cards use a fixed size of **120 × 75 mm**. Subject headings are first rendered in one column. If their real rendered height exceeds the available subject area, the print preview automatically switches that subject block to two columns. If two columns are still too tall, only the subject text is made slightly more compact.
+
+
+### Subject heading selection
+
+Subject headings are selected in this order:
+
+1. First use **all 650 and all 696 fields with $2 psh**.
+2. Only if there are no PSH fields in either 650 or 696, use **650 with $2 czenas**.
+3. Always append **655 with $2 czenas**.
+
+The printed value is taken from subfield **$a**.
+
+
+### Version 2.2.2
+
+- Catalog card size remains fixed at **120 × 75 mm**.
+- Subject headings are aligned to the bottom of the card.
+- Subject headings automatically switch to two columns when their rendered height exceeds the available space; only the subject text is made slightly more compact if needed.
+- Subject selection prefers **650 and 696 with $2 psh**; if no PSH headings exist, **650 with $2 czenas** is used; **655 with $2 czenas** is always appended.

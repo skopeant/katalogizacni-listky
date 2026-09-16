@@ -116,7 +116,7 @@ export class MainComponent {
         <div class="description">${this.escapeHtml(card.description)}</div>
 
         <div class="subjects">
-          ${card.subjects.map(s => `<div>${this.escapeHtml(s)}</div>`).join('')}
+          ${card.subjects.map(s => `<div class="subject-item">${this.escapeHtml(s)}</div>`).join('')}
         </div>
       </section>
     `).join('');
@@ -147,14 +147,16 @@ export class MainComponent {
 
   .catalog-card {
     position: relative;
-    width: 140mm;
-    height: 88mm;
+    width: 120mm;
+    height: 75mm;
     margin: 0 auto;
     border: 0.25mm solid #000;
-    padding: 11mm 11mm 8mm 11mm;
+    padding: 7mm 8mm 6mm 8mm;
     overflow: hidden;
     break-inside: avoid;
     page-break-inside: avoid;
+    display: flex;
+    flex-direction: column;
   }
 
   .catalog-card + .catalog-card {
@@ -169,20 +171,20 @@ export class MainComponent {
 
   .card-author {
     font-family: "Courier New", Courier, monospace;
-    font-size: 15pt;
+    font-size: 13.5pt;
     line-height: 1.05;
     font-weight: 700;
     text-transform: uppercase;
-    padding-right: 8mm;
+    padding-right: 5mm;
   }
 
   .card-meta {
-    margin-top: 2mm;
+    margin-top: 1.5mm;
     padding-right: 2mm;
     text-align: right;
     font-family: "Courier New", Courier, monospace;
-    font-size: 8.5pt;
-    letter-spacing: 0.35mm;
+    font-size: 7.8pt;
+    letter-spacing: 0.25mm;
     white-space: nowrap;
   }
 
@@ -194,27 +196,45 @@ export class MainComponent {
   }
 
   .description {
-    margin-top: 6.5mm;
-    font-size: 10.2pt;
-    line-height: 1.15;
+    margin-top: 4mm;
+    font-size: 9.8pt;
+    line-height: 1.12;
+    flex: 0 0 auto;
   }
 
   .subjects {
-    position: absolute;
-    left: 11mm;
-    right: 11mm;
-    bottom: 8mm;
-    display: block;
-    font-size: 9.7pt;
+    margin-top: auto;
+    min-height: 0;
+    max-height: 34mm;
+    overflow: hidden;
+    font-size: 8.9pt;
     line-height: 1.05;
     text-transform: uppercase;
+    column-gap: 5mm;
   }
 
-  .subjects > div + div {
-    margin-top: 0.8mm;
+  .subjects.two-columns {
+    column-count: 2;
+    column-fill: auto;
   }
 
-  .screen-only { margin: 8px auto 16px; width: 140mm; text-align: right; }
+  .subjects.compact {
+    font-size: 8.1pt;
+    line-height: 1.0;
+    column-gap: 4mm;
+  }
+
+  .subject-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: 0 0 0.65mm 0;
+  }
+
+  .description + .subjects {
+    padding-top: 2.5mm;
+  }
+
+  .screen-only { margin: 8px auto 16px; width: 120mm; text-align: right; }
   .screen-only button { font: 14px Arial, Helvetica, sans-serif; padding: 7px 14px; }
 
   @media screen {
@@ -233,6 +253,32 @@ export class MainComponent {
 </body>
 </html>`);
     w.document.close();
+
+    const fitSubjects = () => {
+      const subjectBlocks = Array.from(
+        w.document.querySelectorAll('.subjects')
+      ) as HTMLElement[];
+
+      subjectBlocks.forEach(block => {
+        block.classList.remove('two-columns', 'compact');
+
+        // First try a single column. If the actual content is higher than the
+        // available area on the 120 × 75 mm card, switch to two columns.
+        if (block.scrollHeight > block.clientHeight + 1) {
+          block.classList.add('two-columns');
+
+          // If even two columns are too tall, make only the subject block
+          // slightly more compact. The rest of the catalog card is unchanged.
+          requestAnimationFrame(() => {
+            if (block.scrollHeight > block.clientHeight + 1) {
+              block.classList.add('compact');
+            }
+          });
+        }
+      });
+    };
+
+    setTimeout(fitSubjects, 80);
 
     const printButton = w.document.getElementById('print-button');
     if (printButton) {
@@ -403,15 +449,34 @@ export class MainComponent {
   }
 
   private buildSubjects(fields: MarcDataField[]): string[] {
-    const all650 = this.fields(fields, '650');
+    const hasSource = (field: MarcDataField, source: string): boolean =>
+      field.subfields.some(
+        s => s.code === '2' && s.value.trim().toLowerCase() === source
+      );
 
-    const czenas = all650.filter(f =>
-      f.subfields.some(s => s.code === '2' && s.value.toLowerCase() === 'czenas')
-    );
+    // Primárně vezmeme VŠECHNA pole 650 A 696 s $2 psh.
+    const psh650 = this.fields(fields, '650')
+      .filter(f => hasSource(f, 'psh'));
 
-    const selected = czenas.length ? czenas : all650;
+    const psh696 = this.fields(fields, '696')
+      .filter(f => hasSource(f, 'psh'));
 
-    return selected
+    const psh = [...psh650, ...psh696];
+
+    // Teprve pokud v záznamu není žádné PSH v 650 ani 696,
+    // použijeme jako fallback 650 s $2 czenas.
+    const fallback650Czenas = this.fields(fields, '650')
+      .filter(f => hasSource(f, 'czenas'));
+
+    const selectedSubjects = psh.length > 0
+      ? psh
+      : fallback650Czenas;
+
+    // K vybraným heslům vždy přidáme 655 s $2 czenas.
+    const genre655Czenas = this.fields(fields, '655')
+      .filter(f => hasSource(f, 'czenas'));
+
+    return [...selectedSubjects, ...genre655Czenas]
       .map(f => this.firstSubfield(f, 'a'))
       .filter(Boolean)
       .map(v => this.stripFinalPunctuation(v).toUpperCase());

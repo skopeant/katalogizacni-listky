@@ -98,6 +98,30 @@ MIT License. Viz [LICENSE](LICENSE).
 
 ## Verze
 
-2.2.1
+2.2.2
 
 
+
+
+### Rozměr katalogizačního lístku
+
+Tištěný katalogizační lístek má pevný rozměr **120 × 75 mm**. Hesla se nejprve vykreslí v jednom sloupci. Pokud jejich skutečná vykreslená výška přesáhne dostupný prostor, tiskový náhled automaticky přepne blok hesel do dvou sloupců. Pokud nestačí ani dva sloupce, mírně se zmenší pouze text hesel.
+
+
+### Výběr předmětových hesel
+
+Předmětová hesla se vybírají v tomto pořadí:
+
+1. Primárně se vezmou **všechna pole 650 a všechna pole 696 s $2 psh**.
+2. Pouze pokud není žádné PSH ani v 650, ani v 696, použije se **650 s $2 czenas**.
+3. Nakonec se vždy přidají **655 s $2 czenas**.
+
+Pro tisk se bere hodnota z podpole **$a**.
+
+
+### Verze 2.2.2
+
+- Katalogizační lístek má nadále pevný rozměr **120 × 75 mm**.
+- Předmětová hesla jsou zarovnána ke spodnímu okraji lístku.
+- Pokud se podle skutečné vykreslené výšky nevejdou, automaticky se přepnou do dvou sloupců; při nutnosti se mírně zmenší pouze text hesel.
+- Přednostně se používají **650 a 696 s $2 psh**; pokud žádné PSH není, použije se **650 s $2 czenas**; **655 s $2 czenas** se vždy přidá.

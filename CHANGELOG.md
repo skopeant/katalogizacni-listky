@@ -1,3 +1,11 @@
+## 2.2.2
+
+- Kept the catalog card at **120 × 75 mm**.
+- Bottom-aligned subject headings within the card.
+- Retained automatic two-column subject layout based on actual rendered height.
+- Updated subject selection priority: use **650 + 696 with $2 psh** first; if no PSH exists, use **650 with $2 czenas**; always append **655 with $2 czenas**.
+- Updated release/version information.
+
 ## 2.2.1
 
 - Changed the application title to the bilingual form **Katalogizační lístky – Catalog Cards**.

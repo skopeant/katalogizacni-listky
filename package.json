@@ -1,6 +1,6 @@
 {
   "name": "katalogizacni-listky",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Ex Libris Alma Cloud App for creating and printing catalog cards from bibliographic records using MMS IDs.",
   "license": "MIT",
   "private": true,
